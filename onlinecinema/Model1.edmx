@@ -1,0 +1,394 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище onlinecinemaModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Director">
+          <Key>
+            <PropertyRef Name="id_dir" />
+          </Key>
+          <Property Name="id_dir" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dirname" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="id_genre" />
+          </Key>
+          <Property Name="id_genre" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="genrename" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id_movie" />
+          </Key>
+          <Property Name="id_movie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="moviename" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="genrem" Type="int" Nullable="false" />
+          <Property Name="release" Type="int" Nullable="false" />
+          <Property Name="dir" Type="int" Nullable="false" />
+          <Property Name="descriptionm" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Us_movie">
+          <Key>
+            <PropertyRef Name="id_us_movie" />
+          </Key>
+          <Property Name="id_us_movie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="us" Type="int" Nullable="false" />
+          <Property Name="mv" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_role">
+          <Key>
+            <PropertyRef Name="id_ur" />
+          </Key>
+          <Property Name="id_ur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="us_role" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id_us" />
+          </Key>
+          <Property Name="id_us" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="pass" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="usrole" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Movie__dir__32E0915F">
+          <End Role="Director" Type="Self.Director" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Director">
+              <PropertyRef Name="id_dir" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="dir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movie__genrem__31EC6D26">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Movie" Type="Self.Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="id_genre" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="genrem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Us_movie__mv__36B12243">
+          <End Role="Movie" Type="Self.Movie" Multiplicity="1" />
+          <End Role="Us_movie" Type="Self.Us_movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id_movie" />
+            </Principal>
+            <Dependent Role="Us_movie">
+              <PropertyRef Name="mv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Us_movie__us__35BCFE0A">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Us_movie" Type="Self.Us_movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id_us" />
+            </Principal>
+            <Dependent Role="Us_movie">
+              <PropertyRef Name="us" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__usrole__286302EC">
+          <End Role="User_role" Type="Self.User_role" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_role">
+              <PropertyRef Name="id_ur" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="usrole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище onlinecinemaModelContainer">
+          <EntitySet Name="Director" EntityType="Self.Director" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Us_movie" EntityType="Self.Us_movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_role" EntityType="Self.User_role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Movie__dir__32E0915F" Association="Self.FK__Movie__dir__32E0915F">
+            <End Role="Director" EntitySet="Director" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movie__genrem__31EC6D26" Association="Self.FK__Movie__genrem__31EC6D26">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Movie" EntitySet="Movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Us_movie__mv__36B12243" Association="Self.FK__Us_movie__mv__36B12243">
+            <End Role="Movie" EntitySet="Movie" />
+            <End Role="Us_movie" EntitySet="Us_movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Us_movie__us__35BCFE0A" Association="Self.FK__Us_movie__us__35BCFE0A">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Us_movie" EntitySet="Us_movie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__usrole__286302EC" Association="Self.FK__Users__usrole__286302EC">
+            <End Role="User_role" EntitySet="User_role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="onlinecinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Director">
+          <Key>
+            <PropertyRef Name="id_dir" />
+          </Key>
+          <Property Name="id_dir" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dirname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="onlinecinemaModel.FK__Movie__dir__32E0915F" FromRole="Director" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="id_genre" />
+          </Key>
+          <Property Name="id_genre" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="genrename" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Movies" Relationship="onlinecinemaModel.FK__Movie__genrem__31EC6D26" FromRole="Genre" ToRole="Movie" />
+        </EntityType>
+        <EntityType Name="User_role">
+          <Key>
+            <PropertyRef Name="id_ur" />
+          </Key>
+          <Property Name="id_ur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="us_role" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__usrole__286302EC" FromRole="User_role" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id_us" />
+          </Key>
+          <Property Name="id_us" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="pass" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usrole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User_role" Relationship="Self.FK__Users__usrole__286302EC" FromRole="Users" ToRole="User_role" />
+          <NavigationProperty Name="Us_movie" Relationship="onlinecinemaModel.FK__Us_movie__us__35BCFE0A" FromRole="User" ToRole="Us_movie" />
+        </EntityType>
+        <Association Name="FK__Users__usrole__286302EC">
+          <End Role="User_role" Type="Self.User_role" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_role">
+              <PropertyRef Name="id_ur" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="usrole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="onlinecinemaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Directors" EntityType="Self.Director" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="User_role" EntityType="Self.User_role" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Users__usrole__286302EC" Association="Self.FK__Users__usrole__286302EC">
+            <End Role="User_role" EntitySet="User_role" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Us_movie" EntityType="onlinecinemaModel.Us_movie" />
+          <AssociationSet Name="FK__Us_movie__us__35BCFE0A" Association="onlinecinemaModel.FK__Us_movie__us__35BCFE0A">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Us_movie" EntitySet="Us_movie" />
+          </AssociationSet>
+          <EntitySet Name="Movies" EntityType="onlinecinemaModel.Movie" />
+          <AssociationSet Name="FK__Movie__dir__32E0915F" Association="onlinecinemaModel.FK__Movie__dir__32E0915F">
+            <End Role="Director" EntitySet="Directors" />
+            <End Role="Movie" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Movie__genrem__31EC6D26" Association="onlinecinemaModel.FK__Movie__genrem__31EC6D26">
+            <End Role="Genre" EntitySet="Genres" />
+            <End Role="Movie" EntitySet="Movies" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Us_movie__mv__36B12243" Association="onlinecinemaModel.FK__Us_movie__mv__36B12243">
+            <End Role="Movie" EntitySet="Movies" />
+            <End Role="Us_movie" EntitySet="Us_movie" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Us_movie">
+          <Key>
+            <PropertyRef Name="id_us_movie" />
+          </Key>
+          <Property Name="id_us_movie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="us" Type="Int32" Nullable="false" />
+          <Property Name="mv" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="onlinecinemaModel.FK__Us_movie__us__35BCFE0A" FromRole="Us_movie" ToRole="User" />
+          <NavigationProperty Name="Movie" Relationship="onlinecinemaModel.FK__Us_movie__mv__36B12243" FromRole="Us_movie" ToRole="Movie" />
+        </EntityType>
+        <Association Name="FK__Us_movie__us__35BCFE0A">
+          <End Type="onlinecinemaModel.User" Role="User" Multiplicity="1" />
+          <End Type="onlinecinemaModel.Us_movie" Role="Us_movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id_us" />
+            </Principal>
+            <Dependent Role="Us_movie">
+              <PropertyRef Name="us" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id_movie" />
+          </Key>
+          <Property Name="id_movie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="moviename" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="genrem" Type="Int32" Nullable="false" />
+          <Property Name="release" Type="Int32" Nullable="false" />
+          <Property Name="dir" Type="Int32" Nullable="false" />
+          <Property Name="descriptionm" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Director" Relationship="onlinecinemaModel.FK__Movie__dir__32E0915F" FromRole="Movie" ToRole="Director" />
+          <NavigationProperty Name="Genre" Relationship="onlinecinemaModel.FK__Movie__genrem__31EC6D26" FromRole="Movie" ToRole="Genre" />
+          <NavigationProperty Name="Us_movie" Relationship="onlinecinemaModel.FK__Us_movie__mv__36B12243" FromRole="Movie" ToRole="Us_movie" />
+        </EntityType>
+        <Association Name="FK__Movie__dir__32E0915F">
+          <End Type="onlinecinemaModel.Director" Role="Director" Multiplicity="1" />
+          <End Type="onlinecinemaModel.Movie" Role="Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Director">
+              <PropertyRef Name="id_dir" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="dir" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Movie__genrem__31EC6D26">
+          <End Type="onlinecinemaModel.Genre" Role="Genre" Multiplicity="1" />
+          <End Type="onlinecinemaModel.Movie" Role="Movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="id_genre" />
+            </Principal>
+            <Dependent Role="Movie">
+              <PropertyRef Name="genrem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Us_movie__mv__36B12243">
+          <End Type="onlinecinemaModel.Movie" Role="Movie" Multiplicity="1" />
+          <End Type="onlinecinemaModel.Us_movie" Role="Us_movie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movie">
+              <PropertyRef Name="id_movie" />
+            </Principal>
+            <Dependent Role="Us_movie">
+              <PropertyRef Name="mv" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище onlinecinemaModelContainer" CdmEntityContainer="onlinecinemaEntities">
+          <EntitySetMapping Name="Directors">
+            <EntityTypeMapping TypeName="onlinecinemaModel.Director">
+              <MappingFragment StoreEntitySet="Director">
+                <ScalarProperty Name="id_dir" ColumnName="id_dir" />
+                <ScalarProperty Name="dirname" ColumnName="dirname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="onlinecinemaModel.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="id_genre" ColumnName="id_genre" />
+                <ScalarProperty Name="genrename" ColumnName="genrename" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_role">
+            <EntityTypeMapping TypeName="onlinecinemaModel.User_role">
+              <MappingFragment StoreEntitySet="User_role">
+                <ScalarProperty Name="id_ur" ColumnName="id_ur" />
+                <ScalarProperty Name="us_role" ColumnName="us_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="onlinecinemaModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id_us" ColumnName="id_us" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="usrole" ColumnName="usrole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Us_movie">
+            <EntityTypeMapping TypeName="onlinecinemaModel.Us_movie">
+              <MappingFragment StoreEntitySet="Us_movie">
+                <ScalarProperty Name="mv" ColumnName="mv" />
+                <ScalarProperty Name="us" ColumnName="us" />
+                <ScalarProperty Name="id_us_movie" ColumnName="id_us_movie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="onlinecinemaModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="descriptionm" ColumnName="descriptionm" />
+                <ScalarProperty Name="dir" ColumnName="dir" />
+                <ScalarProperty Name="release" ColumnName="release" />
+                <ScalarProperty Name="genrem" ColumnName="genrem" />
+                <ScalarProperty Name="moviename" ColumnName="moviename" />
+                <ScalarProperty Name="id_movie" ColumnName="id_movie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram DiagramId="00f882e08aff4168880273b4528f104d" Name="Diagram1">
+        <EntityTypeShape EntityType="onlinecinemaModel.Director" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlinecinemaModel.Genre" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlinecinemaModel.User_role" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlinecinemaModel.User" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlinecinemaModel.Us_movie" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlinecinemaModel.Movie" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Users__usrole__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Us_movie__us__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Movie__dir__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Movie__genrem__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Us_movie__mv__36B12243" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

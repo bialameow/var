@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f12e21e6bf7d4ac39aa79c3358ed667f" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="onlinecinemaModel.Director" Width="1.5" PointX="3.125" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlinecinemaModel.Genre" Width="1.5" PointX="7.875" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlinecinemaModel.User_role" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="onlinecinemaModel.User" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Users__usrole__286302EC" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="onlinecinemaModel.Us_movie" Width="1.5" PointX="5.625" PointY="0.625" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Us_movie__us__35BCFE0A" />
+        <EntityTypeShape EntityType="onlinecinemaModel.Movie" Width="1.5" PointX="5.75" PointY="3.375" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Movie__dir__32E0915F" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Movie__genrem__31EC6D26" />
+        <AssociationConnector Association="onlinecinemaModel.FK__Us_movie__mv__36B12243" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

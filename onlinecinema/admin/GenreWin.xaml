@@ -1,0 +1,94 @@
+﻿<Window x:Class="onlinecinema.admin.GenreWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:onlinecinema.admin"
+        mc:Ignorable="d"
+        Title="GenreWin" Height="250" Width="300"
+        WindowStyle="None" WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize" AllowsTransparency="True"
+        Background="Transparent"
+        FontFamily="Calibri"
+        MouseDown="Window_MouseDown">
+
+    <Window.Resources>
+        <Style x:Key="ButtonStyle1" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Width" Value="110"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
+            <Style.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="20"/>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+
+
+        <Style x:Key="TextBox1" TargetType="TextBox">
+            <Setter Property="Foreground" Value="#4D4D4D"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="FontSize" Value="15"/>
+
+
+
+        </Style>
+
+        <Style x:Key="TextBlock1" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+        </Style>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="53*"/>
+            <RowDefinition Height="127*"/>
+            <RowDefinition Height="41*"/>
+            <RowDefinition Height="29*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.RowSpan="4"
+                Grid.ColumnSpan="3"
+                CornerRadius="15">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FF9595D3" Offset="0.0"/>
+                    <GradientStop Color="#FFC9518D" Offset="1.2"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" >
+            <TextBlock Style="{DynamicResource TextBlock1}" Text="Название жанра"></TextBlock>
+            <TextBox x:Name="tbgenre" MaxLength="20" Text ="{Binding genrename}" Style="{DynamicResource TextBox1}" >
+                <TextBox.Background>
+                    <SolidColorBrush Color="White"
+                                     Opacity="0.2">
+                    </SolidColorBrush>
+                </TextBox.Background>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="1,0" Width="248" >
+            <Button Content="СОХРАНИТЬ"  Style="{DynamicResource ButtonStyle1}" Click="btn_add"/>
+            <Button Content="ОТМЕНА" Style="{DynamicResource ButtonStyle1}" Margin="29 0 0 0" Click="btn_close" />
+        </StackPanel>
+
+
+
+
+    </Grid>
+</Window>
